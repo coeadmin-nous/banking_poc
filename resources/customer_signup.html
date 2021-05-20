@@ -199,11 +199,11 @@
 	<script>
 	function calltoken() {
 	
-	fetch('http://mule-oauth-api.us-e2.cloudhub.io/api/oauth/create',{mode: 'cors'})
+	fetch('https://mule-oauth-api.us-e2.cloudhub.io/api/oauth/create',{mode: 'cors'})
 .then(response => response.json())
 .then(result => {
     document.getElementById('token').innerHTML
-                = result['access_token'];
+                = `MULE_TOKEN : ${result['access_token']}`;
 });
 	
 	}
@@ -216,14 +216,14 @@ for (let i = 0; i < file1.files.length; i++) {
   formData.append('file1', file1.files[i]);
 }
 
-fetch('http://mule-create-sr-api.us-e2.cloudhub.io/api/sendFileAttachment', {
+fetch('https://mule-create-sr-api.us-e2.cloudhub.io/api/sendFileAttachment', {
   method: 'POST',
   body: formData,
 })
 .then(response => response.json())
 .then(result => {
   document.getElementById('token').innerHTML
-                = result['message'];
+                = `MULE API RESPONSE TO CREATE SERVICE REQUEST : ${result['message']}`;
 })
 .catch(error => {
   console.error('Error:', error);
@@ -234,7 +234,7 @@ fetch('http://mule-create-sr-api.us-e2.cloudhub.io/api/sendFileAttachment', {
 	}
 	</script>
   </head>
-  <body onload="calltoken()">
+  <body onload="calltoken()" >
     <div class="testbox">
       <form action="/">
         <div class="banner">
@@ -319,8 +319,8 @@ fetch('http://mule-create-sr-api.us-e2.cloudhub.io/api/sendFileAttachment', {
 	<label><i>****Upload Passport,SSN/AAdhar,PAN card</i></label>
 </div>
         </div>
-		<label id = "token">
-        Token
+		<label id = "token"> <p style="color:blue">
+        Token </p>
     </label>
       </form>
     </div>
